@@ -1,0 +1,18 @@
+.head {
+  width: 100%;
+  height: 6.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head__header {
+  width: 12.5rem;
+  height: 5rem;
+  margin: 0;
+  font-size: 80px;
+  font-weight: 200;
+  text-align: center;
+  color: rgba(175, 47, 47, 0.15);
+  text-rendering: optimizeLegibility;
+}
