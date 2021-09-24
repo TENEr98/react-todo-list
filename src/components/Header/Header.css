@@ -1,14 +1,14 @@
 .head {
   width: 100%;
-  height: 6.25rem;
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .head__header {
   width: 12.5rem;
-  height: 5rem;
   margin: 0;
   font-size: 80px;
   font-weight: 200;
