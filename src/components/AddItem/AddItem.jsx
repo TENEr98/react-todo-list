@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import './AddItem.css'
 
 const AddItem = (props) => {
-  const [inputValue, setInputValue] = useState('')
   const { handleTodoList } = props
+  const [inputValue, setInputValue] = useState('')
 
   const handleInputValue = ({ target: { value } }) => setInputValue(value)
 
