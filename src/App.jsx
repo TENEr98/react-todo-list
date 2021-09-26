@@ -36,7 +36,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log({ 'temp': tempTodoList }, { 'dym': todoList })
     const temp = [...tempTodoList]
     if (filter === 'all') setTodoList([...temp])
     else setTodoList([...temp.filter((item) => item.status === filter)])
