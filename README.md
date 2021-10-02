@@ -3,7 +3,7 @@
 # Installation
 ```sh
 git clone https://github.com/TENEr98/react-todo-list.git
-cd converter-currency
+cd react-todo-list
 ```
 
 # Configuration
