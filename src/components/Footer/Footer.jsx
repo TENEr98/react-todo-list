@@ -2,8 +2,7 @@ import React from 'react'
 
 import './Footer.css'
 
-const Footer = (props) => {
-  const { amountItems, filter, handleFilter, handleClear } = props
+const Footer = ({ amountItems, filter, handleFilter, handleClear }) => {
   return (
     <div className="block__todo_footer">
       <span className="amount__todo_footer">{amountItems} items left</span>

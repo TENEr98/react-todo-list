@@ -1,67 +1,74 @@
 import React, { useState, useEffect } from 'react'
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatDistance from 'date-fns/formatDistance'
 import AddItem from './components/AddItem/AddItem'
 import Header from './components/Header/Header'
 import TodoList from './components/TodoList/TodoList'
 import Footer from './components/Footer/Footer'
+import { mapperDiffTime } from './utils/mapperDiffTime'
 
 import './App.css'
 
 const App = () => {
   const [todoList, setTodoList] = useState([])
-  const [tempTodoList, setTempTodoList] = useState([])
   const [amountItems, setAmountItems] = useState(0)
   const [filter, setFilter] = useState('all')
 
-  const handleTodoList = (value) => {
-    setFilter('all')
-    const temp = [...tempTodoList]
-    temp.push({
-      time: formatDistanceToNow(Date.now(), { includeSeconds: true }),
+  const createItem = (value) => {
+    const temp = [...todoList]
+    if (temp.length !== 0) {
+      mapperDiffTime(temp)
+    }
+    temp.unshift({
+      updatedAt: new Date().getTime(),
+      createdAt: new Date().getTime(),
+      diffTime: formatDistance(new Date(), new Date(), {
+        includeSeconds: true
+      }),
       value,
       status: 'active'
     })
-    setTempTodoList(temp)
     setTodoList(temp)
   }
 
-  const handleFilter = (type) => {
-    setFilter(type)
+  const renderList = (filter) => {
+    const temp = [...todoList]
+    if (filter !== 'all') {
+      const filtered = temp.filter((item) => item.status === filter)
+      return filtered
+    } else {
+      return temp
+    }
   }
 
   const handleClear = () => {
-    const temp = tempTodoList.filter((item) => item.status !== 'complete')
+    const temp = todoList.filter((item) => item.status !== 'complete')
     setTodoList(temp)
-    setTempTodoList(temp)
   }
 
-  useEffect(() => {
-    const temp = [...tempTodoList]
-    if (filter === 'all') setTodoList([...temp])
-    else setTodoList([...temp.filter((item) => item.status === filter)])
-  }, [filter])
+  const handleFilter = (filter) => setFilter(filter)
 
   useEffect(() => {
-    const temp = [...tempTodoList]
+    const temp = [...todoList]
     const amount = temp.filter((item) => item.status === 'active').length
     setAmountItems(amount)
-  }, [tempTodoList])
+  }, [todoList])
 
   return (
     <div className="wrapper">
       <div className="content">
         <Header />
-        <AddItem handleTodoList={handleTodoList} />
+        <AddItem createItem={createItem} />
         <TodoList
           todoList={todoList}
+          renderList={renderList}
+          filter={filter}
           setTodoList={setTodoList}
-          setTempTodoList={setTempTodoList}
         />
         <Footer
-          amountItems={amountItems}
-          filter={filter}
           handleFilter={handleFilter}
+          filter={filter}
           handleClear={handleClear}
+          amountItems={amountItems}
         />
       </div>
     </div>

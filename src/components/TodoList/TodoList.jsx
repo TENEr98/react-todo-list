@@ -3,8 +3,7 @@ import TodoItem from '../TodoItem/TodoItem'
 
 import './TodoList.css'
 
-const TodoList = (props) => {
-  const { todoList, setTodoList, setTempTodoList } = props
+const TodoList = ({ todoList, renderList, filter, setTodoList }) => {
   const [editValue, setEditValue] = useState('')
 
   const handleEditItem = (id) => {
@@ -12,7 +11,6 @@ const TodoList = (props) => {
     temp[id].status = 'edit'
     setEditValue(temp[id].value)
     setTodoList(temp)
-    setTempTodoList(temp)
   }
 
   const handleSaveItem = (id) => {
@@ -22,14 +20,12 @@ const TodoList = (props) => {
     temp[id].status = 'active'
     setEditValue('')
     setTodoList(temp)
-    setTempTodoList(temp)
   }
 
   const handleRemoveItem = (id) => {
     const temp = [...todoList]
     temp.splice(id, 1)
     setTodoList(temp)
-    setTempTodoList(temp)
   }
 
   const handleCancelItem = (id) => {
@@ -38,7 +34,6 @@ const TodoList = (props) => {
     temp[id].status = 'active'
     setEditValue('')
     setTodoList(temp)
-    setTempTodoList(temp)
   }
 
   const handleCompleteItem = ({ target: { checked } }, id) => {
@@ -46,35 +41,32 @@ const TodoList = (props) => {
       const temp = [...todoList]
       temp[id].status = 'complete'
       setTodoList(temp)
-      setTempTodoList(temp)
     } else {
       const temp = [...todoList]
       temp[id].status = 'active'
       setTodoList(temp)
-      setTempTodoList(temp)
     }
   }
-
   const handleEditValue = ({ target: { value } }) => setEditValue(value)
 
   return (
     todoList.length > 0 && (
-      <div className="block_todo_list">
-        {todoList.map((item, idx) => (
+      <ul className="block_todo_list">
+        {renderList(filter).map((item, idx) => (
           <TodoItem
+            key={`${idx}${item.value}`}
             item={item}
             idx={idx}
             editValue={editValue}
-            key={`${item.value}${item.time}${idx}`}
-            handleRemoveItem={handleRemoveItem}
             handleEditItem={handleEditItem}
             handleSaveItem={handleSaveItem}
+            handleRemoveItem={handleRemoveItem}
             handleCancelItem={handleCancelItem}
             handleEditValue={handleEditValue}
             handleCompleteItem={handleCompleteItem}
           />
         ))}
-      </div>
+      </ul>
     )
   )
 }

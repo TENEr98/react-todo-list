@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import './AddItem.css'
 
-const AddItem = (props) => {
-  const { handleTodoList } = props
+const AddItem = ({ createItem }) => {
   const [inputValue, setInputValue] = useState('')
 
-  const handleInputValue = ({ target: { value } }) => setInputValue(value)
+  const onChangeInput = ({ target: { value } }) => {
+    if (value.length < 1) return
+    setInputValue(value)
+  }
 
-  const createItem = (e) => {
-    if (e.keyCode === 13) {
-      handleTodoList(inputValue)
+  const handleInput = ({ keyCode }) => {
+    if (keyCode === 13 && inputValue.length !== 0) {
+      createItem(inputValue)
       setInputValue('')
     }
   }
@@ -20,9 +22,9 @@ const AddItem = (props) => {
         type="text"
         className="input__todo_input"
         placeholder="What needs to be done?"
-        onChange={handleInputValue}
-        onKeyUp={createItem}
         value={inputValue}
+        onChange={onChangeInput}
+        onKeyUp={handleInput}
         autoFocus
       />
     </div>
