@@ -10,12 +10,14 @@ const Footer = ({ amountItems, filter, handleFilter, handleClear }) => {
         <button
           className={`filter__todo_footer ${filter === 'all' && 'selected'} `}
           onClick={() => handleFilter('all')}
+          title="filter: all"
         >
           All
         </button>
         <button
           className={`filter__todo_footer ${filter === 'active' && 'selected'}`}
           onClick={() => handleFilter('active')}
+          title="filter: active"
         >
           Active
         </button>
@@ -24,11 +26,16 @@ const Footer = ({ amountItems, filter, handleFilter, handleClear }) => {
             filter === 'complete' && 'selected'
           }`}
           onClick={() => handleFilter('complete')}
+          title="filter: complete"
         >
           Completed
         </button>
       </div>
-      <button className="clear__todo_footer" onClick={handleClear}>
+      <button
+        className="clear__todo_footer"
+        onClick={handleClear}
+        title="clear: all completed"
+      >
         Clear completed
       </button>
     </div>

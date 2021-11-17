@@ -8,11 +8,11 @@
     <section class="todoapp">
       <header class="header">
         <h1>todos</h1>
-        <input
-          class="new-todo"
-          placeholder="What needs to be done?"
-          autofocus
-        />
+        <form class="new-todo-form">
+          <input class="new-todo" placeholder="Task" autofocus />
+          <input class="new-todo-form__timer" placeholder="Min" autofocus />
+          <input class="new-todo-form__timer" placeholder="Sec" autofocus />
+        </form>
       </header>
       <section class="main">
         <ul class="todo-list">
@@ -20,8 +20,13 @@
             <div class="view">
               <input class="toggle" type="checkbox" />
               <label>
-                <span class="description">Completed task</span>
-                <span class="created">created 17 seconds ago</span>
+                <span class="title">fw</span>
+                <span class="description">
+                  <button class="icon icon-play"></button>
+                  <button class="icon icon-pause"></button>
+                  12:25
+                </span>
+                <span class="description">created 17 seconds ago</span>
               </label>
               <button class="icon icon-edit"></button>
               <button class="icon icon-destroy"></button>
@@ -31,20 +36,30 @@
             <div class="view">
               <input class="toggle" type="checkbox" />
               <label>
-                <span class="description">Editing task</span>
-                <span class="created">created 5 minutes ago</span>
+                <span class="title">fw</span>
+                <span class="description">
+                  <button class="icon icon-play"></button>
+                  <button class="icon icon-pause"></button>
+                  12:25
+                </span>
+                <span class="description">created 5 minutes ago</span>
               </label>
               <button class="icon icon-edit"></button>
               <button class="icon icon-destroy"></button>
             </div>
-            <input type="text" class="edit" value="Editing task" />
+            <input type="text" class="edit" />
           </li>
           <li>
             <div class="view">
               <input class="toggle" type="checkbox" />
               <label>
-                <span class="description">Active task</span>
-                <span class="created">created 5 minutes ago</span>
+                <span class="title">fw</span>
+                <span class="description">
+                  <button class="icon icon-play"></button>
+                  <button class="icon icon-pause"></button>
+                  12:25
+                </span>
+                <span class="description">created 5 minutes ago</span>
               </label>
               <button class="icon icon-edit"></button>
               <button class="icon icon-destroy"></button>
@@ -52,7 +67,7 @@
           </li>
         </ul>
         <footer class="footer">
-          <span class="todo-count">1 items left</span>
+          <span class="todo-count">0 items left</span>
           <ul class="filters">
             <li>
               <button class="selected">All</button>

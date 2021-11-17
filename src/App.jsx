@@ -13,7 +13,9 @@ const App = () => {
   const [amountItems, setAmountItems] = useState(0)
   const [filter, setFilter] = useState('all')
 
-  const createItem = (value) => {
+  const handleFilter = (filter) => setFilter(filter)
+
+  const createItem = (task) => {
     const temp = [...todoList]
     if (temp.length !== 0) {
       mapperDiffTime(temp)
@@ -24,8 +26,9 @@ const App = () => {
       diffTime: formatDistance(new Date(), new Date(), {
         includeSeconds: true
       }),
-      value,
-      status: 'active'
+      ...task,
+      status: 'active',
+      isCountingDown: false
     })
     setTodoList(temp)
   }
@@ -44,8 +47,6 @@ const App = () => {
     const temp = todoList.filter((item) => item.status !== 'complete')
     setTodoList(temp)
   }
-
-  const handleFilter = (filter) => setFilter(filter)
 
   useEffect(() => {
     const temp = [...todoList]

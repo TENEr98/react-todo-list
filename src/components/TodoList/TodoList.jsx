@@ -9,14 +9,14 @@ const TodoList = ({ todoList, renderList, filter, setTodoList }) => {
   const handleEditItem = (id) => {
     const temp = [...todoList]
     temp[id].status = 'edit'
-    setEditValue(temp[id].value)
+    setEditValue(temp[id].task)
     setTodoList(temp)
   }
 
   const handleSaveItem = (id) => {
     if (editValue.length < 1) return
     const temp = [...todoList]
-    temp[id].value = editValue
+    temp[id].task = editValue
     temp[id].status = 'active'
     setEditValue('')
     setTodoList(temp)
@@ -30,7 +30,7 @@ const TodoList = ({ todoList, renderList, filter, setTodoList }) => {
 
   const handleCancelItem = (id) => {
     const temp = [...todoList]
-    temp[id].value = todoList[id].value
+    temp[id].task = todoList[id].value
     temp[id].status = 'active'
     setEditValue('')
     setTodoList(temp)
@@ -47,27 +47,36 @@ const TodoList = ({ todoList, renderList, filter, setTodoList }) => {
       setTodoList(temp)
     }
   }
+
+  const handleResumeItem = (id, isCountingDown) => {
+    const temp = [...todoList]
+    temp[id].isCountingDown = !isCountingDown
+    setTodoList(temp)
+  }
+
   const handleEditValue = ({ target: { value } }) => setEditValue(value)
+  if (todoList.length < 0) return
 
   return (
-    todoList.length > 0 && (
-      <ul className="block_todo_list">
-        {renderList(filter).map((item, idx) => (
-          <TodoItem
-            key={`${idx}${item.value}`}
-            item={item}
-            idx={idx}
-            editValue={editValue}
-            handleEditItem={handleEditItem}
-            handleSaveItem={handleSaveItem}
-            handleRemoveItem={handleRemoveItem}
-            handleCancelItem={handleCancelItem}
-            handleEditValue={handleEditValue}
-            handleCompleteItem={handleCompleteItem}
-          />
-        ))}
-      </ul>
-    )
+    <ul className="block_todo_list">
+      {renderList(filter).map((item, idx) => (
+        <TodoItem
+          key={`${idx}${item.value}`}
+          item={item}
+          idx={idx}
+          editValue={editValue}
+          setTodoList={setTodoList}
+          todoList={todoList}
+          handleEditItem={handleEditItem}
+          handleSaveItem={handleSaveItem}
+          handleRemoveItem={handleRemoveItem}
+          handleCancelItem={handleCancelItem}
+          handleEditValue={handleEditValue}
+          handleCompleteItem={handleCompleteItem}
+          handleResumeItem={handleResumeItem}
+        />
+      ))}
+    </ul>
   )
 }
 

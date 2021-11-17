@@ -1,6 +1,7 @@
 .block__todo_item {
   width: 100%;
-  height: 56px;
+  min-height: 56px;
+  height: auto;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -13,11 +14,16 @@
   display: flex;
   align-items: center;
 }
+.block_label__value_time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 
 .label__value_time {
   padding-left: 4rem;
+  width: 150px;
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
 }
@@ -130,4 +136,20 @@
   border: none;
   background-color: transparent;
   font-size: 20px;
+}
+
+.button__todo_item {
+  cursor: pointer;
+  border-color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 1.625rem;
+  height: 1.375rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.resume {
+  margin-right: 0.125rem;
 }
