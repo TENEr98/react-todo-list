@@ -13,7 +13,7 @@ const AddItem = ({ createItem }) => {
 
   const onChangeInput = ({ target: { value, name } }) => {
     if (value.length < 0) return
-    let temp = value
+    let temp = value.trimStart()
     if (name.includes('min') || name.includes('sec')) {
       temp = temp.replace(/\D/g, '')
       setInputValue((prev) => ({
